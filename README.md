@@ -16,7 +16,7 @@
 
 ## 用法
 ```
-.\LexParser.exe  <file_to_parse_name> [outfile_name]
+.\LexParser.exe <file_to_parse_name> [outfile_name]
 ```
 
 ## 支持情况

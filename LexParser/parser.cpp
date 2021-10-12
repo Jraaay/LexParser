@@ -1,5 +1,7 @@
 #include "parser.h"
 
+// @breif: reopen the file
+// @return: reopen state
 int parser::fileRenew()
 {
     file.close();
@@ -7,8 +9,11 @@ int parser::fileRenew()
     return 0;
 }
 
+// @breif: count file line
+// @return: line number
 int parser::countLine()
 {
+
     fileRenew();
     string tmp;
     int n = 1;
@@ -19,11 +24,8 @@ int parser::countLine()
     return n;
 }
 
-int parser::countWord()
-{
-    return 0;
-}
-
+// @breif: count file char
+// @return: char number
 int parser::countChar()
 {
     fileRenew();
@@ -37,11 +39,15 @@ int parser::countChar()
     return n;
 }
 
+// @breif: parse the file
+// @return: parse answer
 string parser::parseFile()
 {
     fileRenew();
+    // continuly read the file
     while (!file.eof() && !file.fail())
     {
+        // DFA
         switch (state)
         {
         case states::begin:
@@ -773,6 +779,8 @@ string parser::parseFile()
     return parser::out.str();
 }
 
+// @breif: get char from file
+// @return: state
 int parser::get_char()
 {
     if (!file.eof())
@@ -792,6 +800,8 @@ int parser::get_char()
     return 0;
 }
 
+// @breif: get a not empty char from file
+// @return: state
 int parser::get_nbc()
 {
     while (!file.eof() && (C == ' ' || C == '\n' || C == '\r' || C == '\t'))
@@ -805,6 +815,7 @@ int parser::get_nbc()
     return 0;
 }
 
+// @breif: cat a char to token
 void parser::cat()
 {
     int n = strlen(token);
@@ -812,28 +823,35 @@ void parser::cat()
     token[n + 1] = 0;
 }
 
+// @breif: return if C is a letter
+// @return: true or false
 bool parser::letter()
 {
     return (C >= 'a' && C <= 'z') || (C >= 'A' && C <= 'Z') || C == '_';
 }
 
+// @breif: return if C is a digit
+// @return: true or false
 bool parser::digit()
 {
     return (C >= '0' && C <= '9');
 }
 
+// @breif: retract a char
 void parser::retract()
 {
     file.seekg(-1, ios_base::cur);
     char tmp;
     tmp = file.get();
-    if (tmp == '\n')
+    if (tmp == '\n') // maintain line count
     {
         lineCount--;
     }
     file.seekg(-1, ios_base::cur);
 }
 
+// @breif: return a if token is a keyword
+// @return: keyword class
 keywordClass parser::reserve()
 {
     string keywordsStr[] = {"auto", "double", "int", "struct", "break",
@@ -853,16 +871,21 @@ keywordClass parser::reserve()
     return keywordClass::not_key_word;
 }
 
+// @breif: convert a string to a int
+// @return: int
 int parser::SToI()
 {
     return atoi(token);
 }
 
+// @breif: convert a string to a double
+// @return: double
 double parser::SToF()
 {
     return atof(token);
 }
 
+// @breif: output a token
 word parser::return_id(wordClass id, char *charArray, location loc)
 {
     word tmp;
@@ -877,6 +900,7 @@ word parser::return_id(wordClass id, char *charArray, location loc)
     return tmp;
 }
 
+// @breif: output a token
 word parser::return_id(wordClass id, double digit, location loc)
 {
     word tmp;
@@ -891,6 +915,7 @@ word parser::return_id(wordClass id, double digit, location loc)
     return tmp;
 }
 
+// @breif: output a token
 word parser::return_id(wordClass id, long long number, location loc)
 {
     word tmp;
@@ -905,6 +930,7 @@ word parser::return_id(wordClass id, long long number, location loc)
     return tmp;
 }
 
+// @breif: output a token
 word parser::return_id(wordClass id, const char charArray[], location loc)
 {
     word tmp;
@@ -919,6 +945,7 @@ word parser::return_id(wordClass id, const char charArray[], location loc)
     return tmp;
 }
 
+// @breif: print token type
 void parser::printClass(wordClass id)
 {
 

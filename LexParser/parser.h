@@ -1,6 +1,6 @@
 #pragma once
 
-#define MAX_TOKEN_LENGTH 10240
+#define MAX_TOKEN_LENGTH 10240 // max length of a token
 
 #include <iostream>
 #include <fstream>
@@ -11,6 +11,7 @@
 
 using namespace std;
 
+// Token types
 enum class wordClass
 {
     id,
@@ -24,6 +25,7 @@ enum class wordClass
     empty
 };
 
+// DFA states
 enum class states
 {
     begin,
@@ -57,6 +59,7 @@ enum class states
     char_escape
 };
 
+// keywords
 enum class keywordClass : int
 {
     not_key_word = -1,
@@ -106,6 +109,7 @@ enum class keywordClass : int
     keyword__Therad_local
 };
 
+// word class
 class word
 {
 public:
@@ -115,6 +119,7 @@ public:
     string attribute_char = ""; //id_operator_delimiter_keyword
 };
 
+// location of a token
 class location
 {
 public:
@@ -122,10 +127,11 @@ public:
     int col;
 };
 
+// parser class
 class parser
 {
 public:
-    parser(string _filename)
+    parser(string _filename) // Parser constructor and init variables
     {
         filename = _filename;
         file.open(filename, ios::in);
@@ -134,41 +140,40 @@ public:
         loc.line = 0;
         loc.col = 0;
     };
-    ~parser()
+
+    ~parser() // Parser destructor and close file
     {
         file.close();
     };
-    ostringstream out;
-    location loc;
-    int lineCount = 1;
-    int charCount = 0;
-    int wordCount[8];
-    int errorCount = 0;
-    string filename;
-    ifstream file;
-    int fileRenew();
-    int countLine();
-    int countWord();
-    int countChar();
-    string parseFile();
-    states state = states::begin;
-    char C;
-    char token[MAX_TOKEN_LENGTH];
-    int get_char();
-    int get_nbc();
-    void cat();
-    keywordClass iskey;
-    bool letter();
-    bool digit();
-    void retract();
-    keywordClass reserve();
-    int SToI();
-    double SToF();
+    ostringstream out;            // output stream
+    location loc;                 // location of token
+    int lineCount = 1;            // line count
+    int charCount = 0;            // char count
+    int wordCount[8];             // word count
+    int errorCount = 0;           // error count
+    string filename;              // filename
+    ifstream file;                // file stream
+    int fileRenew();              // renew file
+    int countLine();              // count line
+    int countChar();              // count char
+    string parseFile();           // parse file
+    states state = states::begin; // current state
+    char C;                       // current char
+    char token[MAX_TOKEN_LENGTH]; // current token
+    int get_char();               // get char from file
+    int get_nbc();                // get next char that is not empty
+    void cat();                   // cat char to token
+    keywordClass iskey;           // is keyword
+    bool letter();                // return is letter
+    bool digit();                 // return is digit
+    void retract();               // retract file pointer
+    keywordClass reserve();       // return is keyword
+    int SToI();                   // string to int
+    double SToF();                // string to double
+    // ouput tokens
     word return_id(wordClass id, char *charArray, location loc);
     word return_id(wordClass id, double digit, location loc);
     word return_id(wordClass id, long long number, location loc);
     word return_id(wordClass id, const char charArray[], location loc);
-    void printClass(wordClass id);
+    void printClass(wordClass id); // output wordClass
 };
-
-void printClass(wordClass id);
