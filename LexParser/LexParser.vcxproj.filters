@@ -18,5 +18,16 @@
     <ClCompile Include="LexParser.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="parser.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="parser.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="LexParser.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,2 +1,2 @@
-# LexPraser
-A C lex praser
+# LexParser
+A C lex parser
