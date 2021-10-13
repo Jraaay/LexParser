@@ -16,7 +16,7 @@
 
 # C++ 版本
 
-> 使用 Visual Studio C++ 2019 开发，对应项目文件为 `LexParser.vcxproj`
+> 使用 Visual Studio C++ 2019 开发，对应项目文件为 `LexParser\LexParser.vcxproj`
 
 ## 用法
 
