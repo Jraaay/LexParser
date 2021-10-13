@@ -225,42 +225,42 @@ string parser::parseFile()
                 loc.line = lineCount;
                 loc.col = charCount;
                 state = states::begin;
-                return_id(wordClass::id, "(", loc);
+                return_id(wordClass::delimiter, "(", loc);
                 break;
 
             case ')':
                 loc.line = lineCount;
                 loc.col = charCount;
                 state = states::begin;
-                return_id(wordClass::id, ")", loc);
+                return_id(wordClass::delimiter, ")", loc);
                 break;
 
             case '{':
                 loc.line = lineCount;
                 loc.col = charCount;
                 state = states::begin;
-                return_id(wordClass::id, "{", loc);
+                return_id(wordClass::delimiter, "{", loc);
                 break;
 
             case '}':
                 loc.line = lineCount;
                 loc.col = charCount;
                 state = states::begin;
-                return_id(wordClass::id, "}", loc);
+                return_id(wordClass::delimiter, "}", loc);
                 break;
 
             case '[':
                 loc.line = lineCount;
                 loc.col = charCount;
                 state = states::begin;
-                return_id(wordClass::id, "[", loc);
+                return_id(wordClass::delimiter, "[", loc);
                 break;
 
             case ']':
                 loc.line = lineCount;
                 loc.col = charCount;
                 state = states::begin;
-                return_id(wordClass::id, "]", loc);
+                return_id(wordClass::delimiter, "]", loc);
                 break;
 
             case ';':
