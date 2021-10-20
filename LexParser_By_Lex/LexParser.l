@@ -16,8 +16,8 @@
 
 line_comment           (\/\/.*\n)
 block_comment          (\/\*([^/]|[^*]\/|\n)*?\*\/)
-char                   ('[^']')
-string                 (\"[^\"]*\")
+char                   ('([^\\'\n]|\\.)*')
+string                 (\"([^\\\"\n]|\\.)*\")
 letter                 ([a-zA-Z_])
 digit                  ([0-9])
 reserved_word          "auto"|"double"|"int"|"struct"|"break"|"else"|"long"|"switch"|"case"|"enum"|"register"|"typedef"|"char"|"extern"|"return"|"union"|"const"|"float"|"short"|"unsigned"|"continue"|"for"|"signed"|"void"|"default"|"goto"|"sizeof"|"volatile"|"do"|"while"|"static"|"if"|"inline"|"restrict"|"_Alignas"|"_alignof"|"_Atomic"|"_Bool"|"_Complex"|"_Generic"|"_Imaginary"|"_Noreturn"|"_Static_assert"|"_Therad_local"
